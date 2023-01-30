@@ -1,0 +1,58 @@
+﻿<Page x:Class="podgotovka_v2.Pages.SpisokPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:podgotovka_v2.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="SpisokPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="62"/>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ListView x:Name="LVprod" Grid.Row="1" d:ItemsSource="{d:SampleData ItemCount=5}">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" Width="790"></WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="1" BorderBrush="Black" Width="250" Height="250">
+                        <Grid Background="{Binding ColorBG}" Margin="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="89*"/>
+                                <RowDefinition Height="35*"/>
+                            </Grid.RowDefinitions>
+                            <Border BorderThickness="1" BorderBrush="Black" Width="170" >
+                                <Image Grid.Column="0" Grid.RowSpan="4" Source="{Binding MainImagePath}"/>
+                            </Border>
+                            <StackPanel  Grid.Row="1" Orientation="Vertical">
+                                <TextBlock HorizontalAlignment="Center" FontSize="16" Text="{Binding Title}" />
+                                <TextBlock HorizontalAlignment="Center" FontSize="16" Text="{Binding Cost}"/>
+                                <TextBlock x:Name="TBact" HorizontalAlignment="Center" FontSize="12" Text="{Binding IsActiveStr}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackPanel HorizontalAlignment="Center" Grid.Row="0" Orientation="Horizontal">
+            <TextBlock HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="25">Поиск</TextBlock>
+            <TextBox x:Name="TitleDescriptionTb" Margin="5" Height="40" Width="120" TextChanged="TitleDescriptionTb_TextChanged"></TextBox>
+            <ComboBox x:Name="CBproiz" Height="40" Width="90" SelectionChanged="CBproiz_SelectionChanged" DisplayMemberPath="Name" ></ComboBox>
+            <ComboBox x:Name="DiscountSortCb" Margin="5" Height="40" Width="90" SelectionChanged="DiscountSortCb_SelectionChanged" >
+                <ComboBoxItem>По умолчанию</ComboBoxItem>
+                <ComboBoxItem>По возрастанию</ComboBoxItem>
+                <ComboBoxItem>По убыванию</ComboBoxItem>
+            </ComboBox>
+            <Button x:Name="Addbtn" Click="ADDbtn_OnClick" Content="Добавить"/>
+            <Button x:Name="BTNedt" Click="BTNedt_OnClick" Content="Редактировать"/>
+            <Button x:Name="Dekbtn" Click="Dekbtn_OnClick" Content="Удалить"/>
+            <Button x:Name="BTNhist" Click="BTNhist_OnClick" Width="80" Content="История"/>
+        </StackPanel>
+    </Grid>
+</Page>
